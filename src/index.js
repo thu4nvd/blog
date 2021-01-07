@@ -4,7 +4,7 @@ const exphbs  = require('express-handlebars')
 const app = express()
 const morgan = require('morgan')
 const port = 3000
-
+const route = require('./routes')
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({
@@ -27,18 +27,9 @@ app.set('view engine', '.hbs');
 app.set('views', path.join(__dirname, 'resources/views')); 
 // console.log(__dirname)
 
-app.get('/', function (req, res) {
-    res.render('home');
-});
+//Routes init
+route(app)
 
-app.get('/news', (req, res) => {
-    res.render('news');
-  })
-  
-app.post('/search', (req, res) => {
-    console.log(req.body.q)
-    res.render('search');
-  })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
